@@ -36,7 +36,7 @@ public class MovementScript : MonoBehaviour
 
         conn.SimpleMove(moveDirection * magnitude * speed);
         
-        transform.Translate(moveDirection * speed * Time.deltaTime, Space.World); // space defines what the player is relative to 
+        // transform.Translate(moveDirection * speed * Time.deltaTime, Space.World); // space defines what the player is relative to 
 
         ySpeed += Physics.gravity.y * Time.deltaTime;       //sets fall speed equal to gravity and accelerateds by 1/framerate
         if (Input.GetButtonDown("Jump")){                   //if jump button is pressed do 
