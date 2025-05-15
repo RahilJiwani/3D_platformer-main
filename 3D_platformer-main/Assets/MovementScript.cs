@@ -24,21 +24,28 @@ public class MovementScript : MonoBehaviour
         float horizontalMove = Input.GetAxis("Horizontal"); //returns a decimal value between -1 and 1 based on A/D or Left/Right Arrow keys.
         float verticalMove = Input.GetAxis("Vertical"); /// same but foe W/S or Up/Down Arrow keys
 
-        float joyHorizontalMove = joy.Horizontal * speed; //returns a decimal value between -1 and 1 based on the joystick's horizontal movement.
+        
+        
+        Vector3 moveDirection = new Vector3(horizontalMove, 0, verticalMove); // Creates a direction vector using horizontal (x) and vertical (z) movement.
+        // The Y-axis is set to 0, so there's no vertical movement (e.g. jumping or flying).
+
+// Scrapped joystick code
+/*
+float joyHorizontalMove = joy.Horizontal * speed; //returns a decimal value between -1 and 1 based on the joystick's horizontal movement.
         float joyVerticalMove = joy.Vertical * speed; //same but for the joystick's vertical movement
+        
         Vector3 joyMovement = new Vector3(joyHorizontalMove, 0, joyVerticalMove); // Creates a direction vector using joystick horizontal (x) and vertical (z) movement.
         joyMovement.Normalize(); // Normalizes the vector to ensure consistent speed regardless of direction.
         // converts a vector to a unit vector, preserving direction thus ensuring consistent movement speed in all directions (so diagonals aren't faster than straight lines).
-        
-        float joyMagnitude = moveDirection.magnitude; // Get the magnitude of the vector (length)
-        joyMagnitude = Mathf.Clamp(magnitude, 0 , 1); // Clamps the magnitude to a maximum of 1 to prevent faster diagonal movement.
 
-        conn.SimpleMove(joyMagnitude * speed); // Moves the player in the direction of the joystick input at the specified speed.
-        
-        / Vector3 moveDirection is where the player is trying to move and how strongly.
+        float joyMagnitude = moveDirection.magnitude; // Get the magnitude of the vector (length)
+        joyMagnitude = Mathf.Clamp(joyMagnitude, 0 , 1); // Clamps the magnitude to a maximum of 1 to prevent faster diagonal movement.
+
+        conn.SimpleMove(joyMovement * joyMagnitude * speed); // Moves the player in the direction of the joystick input at the specified speed.
+        */
+        // Vector3 moveDirection is where the player is trying to move and how strongly.
         //                           // Magitude: (Horizontal Magnitude, Vertical movement, and depth)  
-        Vector3 moveDirection = new Vector3(horizontalMove, 0, verticalMove); // Creates a direction vector using horizontal (x) and vertical (z) movement.
-        // The Y-axis is set to 0, so there's no vertical movement (e.g. jumping or flying).
+       
         
         moveDirection.Normalize(); // Normalizes the vector to ensure consistent speed regardless of direction.
         // converts moveDirection into a unit vector (length of 1), preserving the direction but ensuring consistent movement speed in all directions (so diagonals aren't faster than straight lines).
